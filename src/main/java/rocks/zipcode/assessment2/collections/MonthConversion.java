@@ -1,5 +1,8 @@
 package rocks.zipcode.assessment2.collections;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Use a map to solve
  */
@@ -8,8 +11,15 @@ public class MonthConversion {
      * @param monthNumber - ordinal of month in the year; i.e. January = 1, February = 2
      * @param monthName - name of month
      */
-    public void add(Integer monthNumber, String monthName) {
 
+   private HashMap<Integer,String> calMap;
+
+    public MonthConversion(){
+        calMap = new HashMap<>();
+    }
+
+    public void add(Integer monthNumber, String monthName) {
+        calMap.put(monthNumber,monthName);
     }
 
     /**
@@ -17,7 +27,9 @@ public class MonthConversion {
      * @return the name of the respective month
      */
     public String getName(Integer monthNumber) {
-        throw new NullPointerException();
+
+       String result =  calMap.get(monthNumber);
+       return result;
     }
 
     /**
@@ -25,7 +37,11 @@ public class MonthConversion {
      * @return - the ordinal of the month in the year
      */
     public int getNumber(String monthName) {
-        return (Integer)null;
+        for(Map.Entry<Integer,String> entry : calMap.entrySet()){
+            if(entry.getValue().equals(monthName)) {
+                return entry.getKey();
+            }
+        } return -1;
     }
 
     /**
@@ -33,7 +49,8 @@ public class MonthConversion {
      * @return true if the monthNumber is in the keySet
      */
     public Boolean isValidNumber(Integer monthNumber) {
-        return null;
+
+        return calMap.containsKey(monthNumber);
     }
 
     /**
@@ -41,14 +58,19 @@ public class MonthConversion {
      * @return true if the monthName is in the valueSet
      */
     public Boolean isValidMonth(String monthName) {
-        return null;
+        for(Map.Entry<Integer,String> entry : calMap.entrySet()){
+            if(entry.getValue().equals(monthName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * @return number of entries in this mapping
      */
     public Integer size() {
-        return -1;
+        return calMap.size();
     }
 
     /**
