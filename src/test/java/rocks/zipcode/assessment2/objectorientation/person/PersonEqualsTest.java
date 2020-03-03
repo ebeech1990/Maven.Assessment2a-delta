@@ -18,6 +18,7 @@ public class PersonEqualsTest {
         Boolean outcome = person1.equals(person2);
 
         // then
+
         Assert.assertTrue(outcome);
     }
 

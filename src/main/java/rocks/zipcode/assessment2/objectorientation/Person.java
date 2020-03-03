@@ -11,17 +11,21 @@ public class Person {
      * @param address - address of person
      */
 
-    private Long id = Long.MIN_VALUE;
-    private String name = "";
-    private Address address = new Address();
+    private Long id;
+    private String name;
+    private Address address;
 
     public Person(Long id, String name, Address address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
+        if(id != null && name != null && address != null) {
+            this.id = id;
+            this.name = name;
+            this.address = address;
+        }
+
     }
 
     public Person() {
+        this(Long.MIN_VALUE, "", new Address());
     }
 
     public Long getId() {
@@ -53,7 +57,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{id=-"+id+", name='"+name+"', address="+getAddress()+"}";
+        return "Person{id="+id+", name='"+name+"', address="+getAddress()+"}";
     }
 
     @Override
@@ -68,16 +72,13 @@ public class Person {
         }
         Person p = (Person) o;
 
-        if(!this.id.equals(((Person) o).id)){
+        if(!this.toString().equals(o.toString())){
             return false;
         }
-        if(!this.name.equals(((Person) o).name)){
-            return false;
-        }
-        if(!this.address.equals(((Person) o).address)){
-            return false;
-        }
-        return p.toString().equals(o.toString());
+
+        return true;
        // return (Boolean)null;
     }
+
+
 }

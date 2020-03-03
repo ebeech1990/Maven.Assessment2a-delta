@@ -12,47 +12,28 @@ public class Inventory {
      * @param strings list of strings to add / remove / fetch from
      */
 
-private HashMap<String,Integer> inv = new HashMap<>();
-private List<String> myList;
+
+private List<String> inv;
 
     public Inventory(List<String> strings) {
-
-        for(String s : strings) {
-            if(s != null){
-                if(inv.containsKey(s)) {
-                    Integer curVal = inv.get(s);
-                    inv.replace(s,curVal+1);
-                }
-
-                else{
-                    inv.put(s,1);
-                }
-            }
-
-        }
+        inv = new ArrayList<>();
+        inv.addAll(strings);
     }
 
     /**
      * nullary constructor initializes a new list
      */
     public Inventory() {
-        myList = new ArrayList<>();
+        inv = new ArrayList<>();
+
     }
 
     /**
      * @param item - increment the number of this item in stock by 1
      */
     public void addItemToInventory(String item) {
-        if(item != null) {
-           if(inv.containsKey(item)) {
-               Integer curVal = inv.get(item);
-               inv.replace(item,curVal+1);
-           }
-           else{
-               inv.put(item,1);
-           }
-        }
 
+        inv.add(item);
     }
 
     /**
@@ -60,13 +41,7 @@ private List<String> myList;
      */
     public void removeItemFromInventory(String item) {
 
-        if(item != null) {
-            if(inv.containsKey(item)) {
-                Integer curVal = inv.get(item);
-                inv.replace(item,curVal-1);
-            }
-
-        }
+        inv.remove(item);
 
     }
 
@@ -75,9 +50,17 @@ private List<String> myList;
      * @return - return the number of items
      */
     public Integer getItemQuantity(String item) {
-
-        return inv.get(item);
+        Integer count = 0;
+        for(String s : inv) {
+            if(s.equals(item)){
+                count++;
+            }
+        }
+        return count;
     }
 
 
-}
+
+        }
+
+

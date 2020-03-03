@@ -1,5 +1,8 @@
 package rocks.zipcode.assessment2.fundamentals;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author leon on 28/11/2018.
  */
@@ -52,12 +55,12 @@ public class StringUtils {
      * @return - true if string only contains alpha characters
      */
     public static Boolean isAlphaString(String string) {
-        if(string.matches("^[a-zA-Z]*$")) {
-            return true;
-
-
+        for (Character c : string.toCharArray()) {
+            if (!Character.isAlphabetic(c) && !Character.isWhitespace(c)) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -65,10 +68,17 @@ public class StringUtils {
      * @return - true if string only contains numeric characters
      */
     public static Boolean isNumericString(String string) {
-        if(string.matches("[0-9]+") && string.length()<2){
-            return true;
+
+        if (string == null) {
+            return false;
         }
-        return false;
+        try {
+            double d = Double.parseDouble(string);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+
     }
 
     /**
@@ -76,12 +86,11 @@ public class StringUtils {
      * @return - true if string only contains special characters
      */
     public static Boolean isSpecialCharacterString(String string) {
-            if(isAlphaString(string)){
-                return false;
-            }
-            if(isNumericString(string)){
-                return false;
-            }
-        return true;
+        Pattern regex = Pattern.compile("[$&+,:;=?@#|]");
+        Matcher matcher = regex.matcher(string);
+        if (matcher.find()){
+            return true;
+        }
+        return false;
     }
 }

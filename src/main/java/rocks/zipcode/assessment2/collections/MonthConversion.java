@@ -12,7 +12,7 @@ public class MonthConversion {
      * @param monthName - name of month
      */
 
-   private HashMap<Integer,String> calMap;
+   private Map<Integer,String> calMap;
 
     public MonthConversion(){
         calMap = new HashMap<>();
@@ -36,12 +36,12 @@ public class MonthConversion {
      * @param monthName - name of month
      * @return - the ordinal of the month in the year
      */
-    public int getNumber(String monthName) {
+    public Integer getNumber(String monthName) {
         for(Map.Entry<Integer,String> entry : calMap.entrySet()){
             if(entry.getValue().equals(monthName)) {
                 return entry.getKey();
             }
-        } return -1;
+        } return null;
     }
 
     /**
@@ -78,6 +78,6 @@ public class MonthConversion {
      * @param monthName - name of month
      */
     public void update(Integer monthNumber, String monthName) {
-
+        calMap.put(monthNumber,monthName);
     }
 }
